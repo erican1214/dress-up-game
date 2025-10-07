@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Dress-Up Game</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Game</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <div class="titleContainer">
+            <h1>What should I wear today?</h1>
+        </div>
+        <div class="dressUpContainer">
+        <div class="characterContainer">
+            <label>
+                <input type="checkbox">
+                <img id="mainBody" src="assets/dress_up_elements/skins/skin_3.png">
+                <img id="hair" style="display:none">
+                <img id="pants" style="display:none">
+                <img id="shirt" style="display:none">
+                <img id="dress" style="display:none">
+                <img id="frontHair" style="display:none">
+                <img id="socks" style="display:none">
+                <img id ="shoes" style="display:none">
+            </label>
+        </div>
+        <div class="closetContainer">
+            <div class="innerClosetContainer">
+                <div class="optionPanel">
+                    <button id="skinButton" class="optionButton"></button>
+                    <button id="hairButton" class="optionButton"></button>
+                    <button id="shirtButton" class="optionButton"></button>
+                    <button id="pantsButton" class="optionButton"></button>
+                    <button id="dressButton" class="optionButton"></button>
+                    <button id="sockButton" class="optionButton"></button>
+                    <button id="shoeButton" class="optionButton"></button>
+                </div>
+                <div class="selectionContainer">
+                    <div id="skinSelection" class="selection">
+                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_1_icon.png" />
+                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_2_icon.png" />
+                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_3_icon.png" />
+                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_4_icon.png" />
+                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_5_icon.png" />
+                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_6_icon.png" />
+                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_7_icon.png" />
+                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_8_icon.png" />
+                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_9_icon.png" />
+                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_10_icon.png" />
+                    </div>
+                    <div id="hairSelection" class="selection" style="display:none">
+                        <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_1_icon.png" />
+                        <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_2_icon.png" />
+                        <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_3_icon.png" />
+                        <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_4_icon.png" />
+                        <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_5_icon.png" />
+                        <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_6_icon.png" />
+                        <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_7_icon.png" />
+                        <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_8_icon.png" />
+                        <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_9_icon.png" />
+                        <input type="image" class="hairOptions" src="assets/dress_up_icons/front_hair/front_hair_1_icon.png" />
+                        <input type="image" class="hairOptions" src="assets/dress_up_icons/front_hair/front_hair_2_icon.png" />
+                    </div>
+                    <div id="shirtSelection" class="selection" style="display:none">
+                        <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_1_icon.png" />
+                        <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_2_icon.png" />
+                        <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_3_icon.png" />
+                        <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_4_icon.png" />
+                        <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_5_icon.png" />
+                        <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_6_icon.png" />
+                        <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_7_icon.png" />
+                        <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_8_icon.png" />
+                    </div>
+                    <div id="pantsSelection" class="selection" style="display:none">
+                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_1_icon.png" />
+                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_2_icon.png" />
+                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_3_icon.png" />
+                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_4_icon.png" />
+                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_5_icon.png" />
+                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_6_icon.png" />
+                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_7_icon.png" />
+                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_8_icon.png" />
+                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_9_icon.png" />
+                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_10_icon.png" />
+                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_11_icon.png" />
+                    </div>
+                    <div id="dressSelection" class="selection" style="display:none">
+                        <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_1_icon.png" />
+                        <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_2_icon.png" />
+                        <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_3_icon.png" />
+                        <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_4_icon.png" />
+                        <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_5_icon.png" />
+                        <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_6_icon.png" />
+                        <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_7_icon.png" />
+                        <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_8_icon.png" />
+                        <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_9_icon.png" />
+                    </div>
+                    <div id="sockSelection" class="selection" style="display:none">
+                        <input type="image" class="sockOptions" src="assets/dress_up_icons/socks/socks_1_icon.png" />
+                        <input type="image" class="sockOptions" src="assets/dress_up_icons/socks/socks_2_icon.png" />
+                        <input type="image" class="sockOptions" src="assets/dress_up_icons/socks/socks_3_icon.png" />
+                        <input type="image" class="sockOptions" src="assets/dress_up_icons/socks/socks_4_icon.png" />
+                        <input type="image" class="sockOptions" src="assets/dress_up_icons/socks/socks_5_icon.png" />
+                        <input type="image" class="sockOptions" src="assets/dress_up_icons/socks/socks_6_icon.png" />
+                    </div>
+                    <div id="shoeSelection" class="selection" style="display:none">
+                        <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_1_icon.png" />
+                        <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_2_icon.png" />
+                        <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_3_icon.png" />
+                        <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_4_icon.png" />
+                        <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_5_icon.png" />
+                        <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_6_icon.png" />
+                        <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_7_icon.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </body>
+</html>
