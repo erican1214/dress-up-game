@@ -1,3 +1,5 @@
+const optionButton = document.getElementsByClassName("optionButton");
+
 const skinButton = document.getElementById("skinButton");
 const hairButton = document.getElementById("hairButton");
 const shirtButton = document.getElementById("shirtButton");
@@ -140,6 +142,16 @@ const sfxPics =
 }
 
 const allButtons = document.getElementsByTagName("button");
+
+optionButton[0].classList.add("selected");
+if (optionButton) {
+    for (let i = 0; i < optionButton.length; i++) {
+        optionButton[i].addEventListener("click", event => {
+            document.querySelector(".selected")?.classList.remove("selected");
+            optionButton[i].classList.add("selected");
+        })
+    }
+}
 
 function displayCurrentSelection(selection) {
     for (let i = 0; i < allSelections.length; i++) {
