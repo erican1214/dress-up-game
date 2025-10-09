@@ -19,10 +19,40 @@ body {
     justify-content: space-evenly;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 .titleContainer {
     position: relative;
     width: 100%;
     height: 5%;
+    text-align: center;
+}
+
+.audioContainer {
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    width: fit-content;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform:translate(0, -25%);
+}
+
+#musicButton,
+#sfxButton {
+    width: fit-content;
+    height: fit-content;
+    background-color: transparent;
+    border: none;
+}
+
+#musicIcon,
+#sfxIcon {
+    width: 40px;
+    height: 40px;
 }
 
 .dressUpContainer {
@@ -124,15 +154,22 @@ body {
     display: grid;
     width: 10%;
     height: 100%;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     align-items: center;
 }
 
 .optionButton {
     position: relative;
     width: 100%;
-    height: 30%;
+    height: fit-content;
     justify-content: space-evenly;
+    font-size: 15px;
+    background-color: lightgoldenrodyellow;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: none;
 }
 
 .selectionContainer {
@@ -157,7 +194,7 @@ body {
 
 }
 
-input[type="image"] {
+.selection input[type="image"] {
     position: relative;
     display: block;
     width: 100px;
@@ -171,5 +208,37 @@ input[type="image"] {
 }
 
 input[type="image"]:focus {
+    opacity: 0.6;
+}
+
+.resetButtons {
+    position: absolute;
+    display: grid;
+    gap: 10px;
+    padding: 10px;
+    bottom: 0;
+    right: 0;
+    width: 100px;
+    height: fit-content;
+}
+
+.resetSectionButton,
+.resetAllButton {
+    font-size: 15px;
+    padding: 10px;
+    background-color: lightgoldenrodyellow;
+    border-radius: 5px;
+    border: none;
+}
+
+.resetSectionButton:hover,
+.resetAllButton:hover {
+    transform: scale(1.2);
+    transform-origin: bottom right;
+    transition: all 0.3s ease;
+}
+
+.resetSectionButton:focus,
+.resetAllButton:focus {
     opacity: 0.6;
 }

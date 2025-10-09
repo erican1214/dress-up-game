@@ -5,7 +5,7 @@ const pantsButton = document.getElementById("pantsButton");
 const dressButton = document.getElementById("dressButton");
 const sockButton = document.getElementById("sockButton");
 const shoeButton = document.getElementById("shoeButton");
-let allSelections = document.getElementsByClassName("selection");
+let allSelections = document.getElementsByClassName("selectionContainer");
 
 let skinOptions = document.getElementsByClassName("skinOptions");
 let hairOptions = document.getElementsByClassName("hairOptions");
@@ -14,7 +14,6 @@ let shirtOptions = document.getElementsByClassName("shirtOptions");
 let dressOptions = document.getElementsByClassName("dressOptions");
 let sockOptions = document.getElementsByClassName("sockOptions");
 let shoeOptions = document.getElementsByClassName("shoeOptions");
-
 
 const skinList =
 [
@@ -45,7 +44,7 @@ const hairList =
     "assets/dress_up_elements/front_hair/front_hair_2.png"
 ];
 
-let shirtList =
+const shirtList =
 [
     "assets/dress_up_elements/shirts/shirt_1.png",
     "assets/dress_up_elements/shirts/shirt_2.png",
@@ -57,7 +56,7 @@ let shirtList =
     "assets/dress_up_elements/shirts/shirt_8.png"
 ];
 
-let pantsList =
+const pantsList =
 [
     "assets/dress_up_elements/pants/pants_1.png",
     "assets/dress_up_elements/pants/pants_2.png",
@@ -72,7 +71,7 @@ let pantsList =
     "assets/dress_up_elements/pants/pants_11.png"
 ];
 
-let dressList =
+const dressList =
 [
     "assets/dress_up_elements/dresses/dress_1.png",
     "assets/dress_up_elements/dresses/dress_2.png",
@@ -85,7 +84,7 @@ let dressList =
     "assets/dress_up_elements/dresses/dress_9.png"
 ];
 
-let sockList =
+const sockList =
 [
     "assets/dress_up_elements/socks/socks_1.png",
     "assets/dress_up_elements/socks/socks_2.png",
@@ -95,7 +94,7 @@ let sockList =
     "assets/dress_up_elements/socks/socks_6.png"
 ];
 
-let shoeList =
+const shoeList =
 [
     "assets/dress_up_elements/shoes/shoes_1.png",
     "assets/dress_up_elements/shoes/shoes_2.png",
@@ -115,6 +114,33 @@ let frontHair = document.getElementById("frontHair");
 let socks = document.getElementById("socks");
 let shoes = document.getElementById("shoes");
 
+const fullOutfit = [hair, shirt, pants, dress, socks, shoes];
+
+const resetSectionButton = document.getElementsByClassName("resetSectionButton");
+const resetAllButton = document.getElementsByClassName("resetAllButton");
+
+const backgroundMusic = document.getElementById("backgroundMusic");
+const clickSound = document.getElementById("clickSound");
+
+const musicButton = document.getElementById("musicButton");
+const sfxButton = document.getElementById("sfxButton");
+let musicIcon = document.getElementById("musicIcon");
+let sfxIcon = document.getElementById("sfxIcon");
+
+const musicPics =
+{
+    "unmuted" : "assets/audio_icons/music_icon.png",
+    "muted" : "assets/audio_icons/music_muted_icon.png"
+}
+
+const sfxPics =
+{
+    "unmuted" : "assets/audio_icons/sfx_icon.png",
+    "muted" : "assets/audio_icons/sfx_muted_icon.png"
+}
+
+const allButtons = document.getElementsByTagName("button");
+
 function displayCurrentSelection(selection) {
     for (let i = 0; i < allSelections.length; i++) {
         if (allSelections[i].getAttribute('id') === selection) {
@@ -122,7 +148,6 @@ function displayCurrentSelection(selection) {
         }
         else {
             allSelections[i].style.display = "none";
-            allSelections[i].getAttribute('id');
         }
     }
 }
@@ -173,6 +198,7 @@ if (skinOptions) {
     for (let i = 0; i < skinOptions.length; i++) {
         skinOptions[i].addEventListener("click", event => {
             mainBody.src = skinList[i];
+            playSFX();
         })
     }
 }
@@ -202,6 +228,7 @@ if (hairOptions) {
                 hair.style.display = "block";
                 hair.src = hairList[i];
             }
+            playSFX();
         })
     }
 }
@@ -212,6 +239,7 @@ if (pantsOptions) {
             dress.style.display = "none";
             pants.style.display = "block";
             pants.src = pantsList[i];
+            playSFX();
         })
     }
 }
@@ -222,6 +250,7 @@ if (shirtOptions) {
             dress.style.display = "none";
             shirt.style.display = "block";
             shirt.src = shirtList[i];
+            playSFX();
         })
     }
 }
@@ -233,6 +262,7 @@ if (dressOptions) {
             shirt.style.display = "none";
             dress.style.display = "block";
             dress.src = dressList[i];
+            playSFX();
         })
     }
 }
@@ -242,6 +272,7 @@ if (sockOptions) {
         sockOptions[i].addEventListener("click", event => {
             socks.style.display = "block";
             socks.src = sockList[i];
+            playSFX();
         })
     }
 }
@@ -251,6 +282,72 @@ if (shoeOptions) {
         shoeOptions[i].addEventListener("click", event => {
             shoes.style.display = "block";
             shoes.src = shoeList[i];
+            playSFX();
         })
+    }
+}
+
+if (resetSectionButton) {
+    for (let i = 0; i < resetSectionButton.length; i++) {
+        resetSectionButton[i].addEventListener("click", event => {
+            if (i == 0) {
+                frontHair.style.display = "none";
+            }
+            fullOutfit[i].style.display = "none";
+        })
+    }
+}
+
+if (resetAllButton) {
+    for (let i = 0; i < resetAllButton.length; i++) {
+        resetAllButton[i].addEventListener("click", event => {
+            for (let k = 0; k < fullOutfit.length; k++) {
+                fullOutfit[k].style.display = "none";
+            }
+            frontHair.style.display = "none";
+        })
+    }
+}
+
+if (musicButton) {
+    musicButton.addEventListener("click", event => {
+        if (backgroundMusic.muted) {
+            backgroundMusic.muted = false;
+            backgroundMusic.play();
+            musicIcon.src = musicPics["unmuted"];
+        }
+        else {
+            backgroundMusic.muted = true;
+            backgroundMusic.pause();
+            musicIcon.src = musicPics["muted"];
+        }
+    })
+}
+
+if (sfxButton) {
+    sfxButton.addEventListener("click", event => {
+        if (clickSound.muted) {
+            clickSound.muted = false;
+            sfxIcon.src = sfxPics["unmuted"];
+        }
+        else {
+            clickSound.muted = true;
+            sfxIcon.src = sfxPics["muted"];
+        };
+    })
+}
+
+if (allButtons) {
+    for (let i = 0; i < allButtons.length; i++) {
+        allButtons[i].addEventListener("click", event => {
+            playSFX();
+        })
+    }
+}
+
+function playSFX() {
+    if (!clickSound.muted) {
+        clickSound.currentTime = 0;
+        clickSound.play();
     }
 }

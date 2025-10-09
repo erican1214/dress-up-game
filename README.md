@@ -30,6 +30,14 @@ This is a game where you can choose the outfit and customize the appearance of y
 - I have only tested this webpage on a Google Chrome Browser. It is possible that it won't be compatible with other browsers
 
 ### Image Attributions
+- All images are drawn by me on [Pixlart](https://www.pixilart.com/)
+
+### Audio Attributions
+- [Loop003-pop.wav (Background music)](https://freesound.org/s/18974/) by bebeto
+- [Button-Click-2.wav (Button SFX)](https://freesound.org/s/506053/) by Mellau
+
+### Font Attributions
+- [Minecraft.ttf](https://www.dafont.com/minecraft.font) by Crafton Gaming
 
 ## File Overview
 &larr; README.md
