@@ -9,159 +9,173 @@
         <script src="script.js" defer></script>
     </head>
     <body>
-        <div class="titleContainer">
-            <div class="audioContainer">
-                <button id="musicButton"><img id="musicIcon" src="assets/audio_icons/music_muted_icon.png"></button>
-                <button id="sfxButton"><img id="sfxIcon" src="assets/audio_icons/sfx_muted_icon.png"></button>
-                <audio id="backgroundMusic" style = "display:none" controls muted loop>
-                    <source src="assets/audio_files/Loop003-pop.wav" type="audio/wav">
-                </audio>
-                <audio id="clickSound" style = "display:none" controls muted>
-                    <source src="assets/audio_files/Button-Click-2.wav" type="audio/wav">
-                </audio>
+        <div class="audioContainer">
+            <button id="musicButton"><img id="musicIcon" src="assets/audio_icons/music_muted_icon.png"></button>
+            <button id="sfxButton"><img id="sfxIcon" src="assets/audio_icons/sfx_muted_icon.png"></button>
+            <audio id="backgroundMusic" style = "display:none" controls muted loop>
+                <source src="assets/audio_files/Loop003-pop.wav" type="audio/wav">
+            </audio>
+            <audio id="clickSound" style = "display:none" controls muted>
+                <source src="assets/audio_files/Button-Click-2.wav" type="audio/wav">
+            </audio>
+        </div>
+        <div id="mainMenuPage">
+            <h1>Welcome to my Dress-Up Game!</h1>
+            <button id="startButton">Click here to start!</button>
+        </div>
+        <div id="gamePage" style="display:none">
+            <div class="titleContainer">
+                <h1>What should I wear today?</h1>
             </div>
-            <h1>What should I wear today?</h1>
-        </div>
-        <div class="dressUpContainer">
-        <div class="characterContainer">
-            <label>
-                <input type="checkbox">
-                <img id="mainBody" src="assets/dress_up_elements/skins/skin_3.png">
-                <img id="hair" style="display:none">
-                <img id="pants" style="display:none">
-                <img id="shirt" style="display:none">
-                <img id="dress" style="display:none">
-                <img id="frontHair" style="display:none">
-                <img id="socks" style="display:none">
-                <img id ="shoes" style="display:none">
-            </label>
-        </div>
-        <div class="closetContainer">
-            <div class="innerClosetContainer">
-                <div class="optionPanel">
-                    <button id="skinButton" class="optionButton">Skin</button>
-                    <button id="hairButton" class="optionButton">Hair</button>
-                    <button id="shirtButton" class="optionButton">Shirt</button>
-                    <button id="pantsButton" class="optionButton">Pants</button>
-                    <button id="dressButton" class="optionButton">Dress</button>
-                    <button id="sockButton" class="optionButton">Socks</button>
-                    <button id="shoeButton" class="optionButton">Shoes</button>
+            <div class="dressUpContainer">
+                <div id="characterContainer">
+                    <button id="shirtAndPantsButton"><img id=shirtAndPantsIcon src="assets/dress_up_layer_icons/shirt_over_pants_icon.png"></button>
+                    <button id="pantsAndShoesButton"><img id=pantsAndShoesIcon src="assets/dress_up_layer_icons/pants_over_shoes_icon.png"></button>
+                    <div id="doneContainer">
+                        <p id="popUpMessage" style="display:none"></p>
+                        <button id="doneButton"><img src="assets/other/checkmark.png"></button>
+                        <button id="restartGameButton" style="display:none">Restart Game?</button>
+                    </div>
+                    <label>
+                        <input id="zoomCheckbox" type="checkbox" style="display:none">
+                        <img id="mainBody" src="assets/dress_up_elements/skins/skin_3.png">
+                        <img id="hair" style="display:none">
+                        <img id="pants" style="display:none">
+                        <img id="shirt" style="display:none">
+                        <img id="dress" style="display:none">
+                        <img id="frontHair" style="display:none">
+                        <img id="socks" style="display:none">
+                        <img id ="shoes" style="display:none">
+                    </label>
                 </div>
-                <div id="skinSelection" class="selectionContainer">
-                    <div class="selection">
-                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_1_icon.png" />
-                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_2_icon.png" />
-                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_3_icon.png" />
-                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_4_icon.png" />
-                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_5_icon.png" />
-                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_6_icon.png" />
-                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_7_icon.png" />
-                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_8_icon.png" />
-                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_9_icon.png" />
-                        <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_10_icon.png" />
-                    </div>
-                    <div class="resetButtons">
-                        <button class="resetAllButton">Reset all</button>
-                    </div>
-                </div>
-                <div id="hairSelection" class="selectionContainer" style="display:none">
-                    <div class="selection">
-                        <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_1_icon.png" />
-                        <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_2_icon.png" />
-                        <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_3_icon.png" />
-                        <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_4_icon.png" />
-                        <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_5_icon.png" />
-                        <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_6_icon.png" />
-                        <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_7_icon.png" />
-                        <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_8_icon.png" />
-                        <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_9_icon.png" />
-                        <input type="image" class="hairOptions" src="assets/dress_up_icons/front_hair/front_hair_1_icon.png" />
-                        <input type="image" class="hairOptions" src="assets/dress_up_icons/front_hair/front_hair_2_icon.png" />
-                    </div>
-                    <div class="resetButtons">
-                        <button class="resetSectionButton">Reset this section</button>
-                        <button class="resetAllButton">Reset all</button>
-                    </div>
-                </div>
-                <div id="shirtSelection" class="selectionContainer" style="display:none">
-                    <div class="selection">
-                        <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_1_icon.png" />
-                        <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_2_icon.png" />
-                        <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_3_icon.png" />
-                        <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_4_icon.png" />
-                        <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_5_icon.png" />
-                        <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_6_icon.png" />
-                        <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_7_icon.png" />
-                        <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_8_icon.png" />
-                    </div>
-                    <div class="resetButtons">
-                        <button class="resetSectionButton">Reset this section</button>
-                        <button class="resetAllButton">Reset all</button>
-                    </div>
-                </div>
-                <div id="pantsSelection" class="selectionContainer" style="display:none">
-                    <div class="selection">
-                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_1_icon.png" />
-                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_2_icon.png" />
-                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_3_icon.png" />
-                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_4_icon.png" />
-                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_5_icon.png" />
-                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_6_icon.png" />
-                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_7_icon.png" />
-                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_8_icon.png" />
-                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_9_icon.png" />
-                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_10_icon.png" />
-                        <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_11_icon.png" />
-                    </div>
-                    <div class="resetButtons">
-                        <button class="resetSectionButton">Reset this section</button>
-                        <button class="resetAllButton">Reset all</button>
-                    </div>
-                </div>
-                <div id="dressSelection" class="selectionContainer" style="display:none">
-                    <div class="selection">
-                        <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_1_icon.png" />
-                        <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_2_icon.png" />
-                        <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_3_icon.png" />
-                        <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_4_icon.png" />
-                        <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_5_icon.png" />
-                        <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_6_icon.png" />
-                        <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_7_icon.png" />
-                        <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_8_icon.png" />
-                        <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_9_icon.png" />
-                    </div>
-                    <div class="resetButtons">
-                        <button class="resetSectionButton">Reset this section</button>
-                        <button class="resetAllButton">Reset all</button>
-                    </div>
-                </div>
-                <div id="sockSelection" class="selectionContainer" style="display:none">
-                    <div class="selection">
-                        <input type="image" class="sockOptions" src="assets/dress_up_icons/socks/socks_1_icon.png" />
-                        <input type="image" class="sockOptions" src="assets/dress_up_icons/socks/socks_2_icon.png" />
-                        <input type="image" class="sockOptions" src="assets/dress_up_icons/socks/socks_3_icon.png" />
-                        <input type="image" class="sockOptions" src="assets/dress_up_icons/socks/socks_4_icon.png" />
-                        <input type="image" class="sockOptions" src="assets/dress_up_icons/socks/socks_5_icon.png" />
-                        <input type="image" class="sockOptions" src="assets/dress_up_icons/socks/socks_6_icon.png" />
-                    </div>
-                    <div class="resetButtons">
-                        <button class="resetSectionButton">Reset this section</button>
-                        <button class="resetAllButton">Reset all</button>
-                    </div>
-                </div>
-                <div id="shoeSelection" class="selectionContainer" style="display:none">
-                    <div class="selection">
-                        <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_1_icon.png" />
-                        <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_2_icon.png" />
-                        <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_3_icon.png" />
-                        <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_4_icon.png" />
-                        <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_5_icon.png" />
-                        <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_6_icon.png" />
-                        <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_7_icon.png" />
-                    </div>
-                    <div class="resetButtons">
-                        <button class="resetSectionButton">Reset this section</button>
-                        <button class="resetAllButton">Reset all</button>
+                <div id="closetContainer">
+                    <div id="innerClosetContainer">
+                        <div id="optionPanel">
+                            <button id="skinButton" class="optionButton">Skin</button>
+                            <button id="hairButton" class="optionButton">Hair</button>
+                            <button id="shirtButton" class="optionButton">Shirt</button>
+                            <button id="pantsButton" class="optionButton">Pants</button>
+                            <button id="dressButton" class="optionButton">Dress</button>
+                            <button id="sockButton" class="optionButton">Socks</button>
+                            <button id="shoeButton" class="optionButton">Shoes</button>
+                        </div>
+                        <div id="skinSelection" class="selectionContainer">
+                            <div class="selection">
+                                <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_1_icon.png" />
+                                <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_2_icon.png" />
+                                <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_3_icon.png" />
+                                <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_4_icon.png" />
+                                <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_5_icon.png" />
+                                <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_6_icon.png" />
+                                <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_7_icon.png" />
+                                <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_8_icon.png" />
+                                <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_9_icon.png" />
+                                <input type="image" class="skinOptions" src="assets/dress_up_icons/skins/skin_10_icon.png" />
+                            </div>
+                            <div class="resetButtons">
+                                <button class="resetAllButton">Reset all</button>
+                            </div>
+                        </div>
+                        <div id="hairSelection" class="selectionContainer" style="display:none">
+                            <div class="selection">
+                                <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_1_icon.png" />
+                                <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_2_icon.png" />
+                                <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_3_icon.png" />
+                                <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_4_icon.png" />
+                                <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_5_icon.png" />
+                                <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_6_icon.png" />
+                                <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_7_icon.png" />
+                                <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_8_icon.png" />
+                                <input type="image" class="hairOptions" src="assets/dress_up_icons/hair/hair_9_icon.png" />
+                                <input type="image" class="hairOptions" src="assets/dress_up_icons/front_hair/front_hair_1_icon.png" />
+                                <input type="image" class="hairOptions" src="assets/dress_up_icons/front_hair/front_hair_2_icon.png" />
+                            </div>
+                            <div class="resetButtons">
+                                <button class="resetSectionButton">Reset this section</button>
+                                <button class="resetAllButton">Reset all</button>
+                            </div>
+                        </div>
+                        <div id="shirtSelection" class="selectionContainer" style="display:none">
+                            <div class="selection">
+                                <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_1_icon.png" />
+                                <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_2_icon.png" />
+                                <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_3_icon.png" />
+                                <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_4_icon.png" />
+                                <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_5_icon.png" />
+                                <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_6_icon.png" />
+                                <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_7_icon.png" />
+                                <input type="image" class="shirtOptions" src="assets/dress_up_icons/shirts/shirt_8_icon.png" />
+                            </div>
+                            <div class="resetButtons">
+                                <button class="resetSectionButton">Reset this section</button>
+                                <button class="resetAllButton">Reset all</button>
+                            </div>
+                        </div>
+                        <div id="pantsSelection" class="selectionContainer" style="display:none">
+                            <div class="selection">
+                                <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_1_icon.png" />
+                                <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_2_icon.png" />
+                                <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_3_icon.png" />
+                                <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_4_icon.png" />
+                                <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_5_icon.png" />
+                                <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_6_icon.png" />
+                                <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_7_icon.png" />
+                                <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_8_icon.png" />
+                                <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_9_icon.png" />
+                                <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_10_icon.png" />
+                                <input type="image" class="pantsOptions" src="assets/dress_up_icons/pants/pants_11_icon.png" />
+                            </div>
+                            <div class="resetButtons">
+                                <button class="resetSectionButton">Reset this section</button>
+                                <button class="resetAllButton">Reset all</button>
+                            </div>
+                        </div>
+                        <div id="dressSelection" class="selectionContainer" style="display:none">
+                            <div class="selection">
+                                <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_1_icon.png" />
+                                <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_2_icon.png" />
+                                <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_3_icon.png" />
+                                <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_4_icon.png" />
+                                <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_5_icon.png" />
+                                <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_6_icon.png" />
+                                <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_7_icon.png" />
+                                <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_8_icon.png" />
+                                <input type="image" class="dressOptions" src="assets/dress_up_icons/dresses/dress_9_icon.png" />
+                            </div>
+                            <div class="resetButtons">
+                                <button class="resetSectionButton">Reset this section</button>
+                                <button class="resetAllButton">Reset all</button>
+                            </div>
+                        </div>
+                        <div id="sockSelection" class="selectionContainer" style="display:none">
+                            <div class="selection">
+                                <input type="image" class="sockOptions" src="assets/dress_up_icons/socks/socks_1_icon.png" />
+                                <input type="image" class="sockOptions" src="assets/dress_up_icons/socks/socks_2_icon.png" />
+                                <input type="image" class="sockOptions" src="assets/dress_up_icons/socks/socks_3_icon.png" />
+                                <input type="image" class="sockOptions" src="assets/dress_up_icons/socks/socks_4_icon.png" />
+                                <input type="image" class="sockOptions" src="assets/dress_up_icons/socks/socks_5_icon.png" />
+                                <input type="image" class="sockOptions" src="assets/dress_up_icons/socks/socks_6_icon.png" />
+                            </div>
+                            <div class="resetButtons">
+                                <button class="resetSectionButton">Reset this section</button>
+                                <button class="resetAllButton">Reset all</button>
+                            </div>
+                        </div>
+                        <div id="shoeSelection" class="selectionContainer" style="display:none">
+                            <div class="selection">
+                                <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_1_icon.png" />
+                                <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_2_icon.png" />
+                                <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_3_icon.png" />
+                                <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_4_icon.png" />
+                                <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_5_icon.png" />
+                                <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_6_icon.png" />
+                                <input type="image" class="shoeOptions" src="assets/dress_up_icons/shoes/shoes_7_icon.png" />
+                            </div>
+                            <div class="resetButtons">
+                                <button class="resetSectionButton">Reset this section</button>
+                                <button class="resetAllButton">Reset all</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

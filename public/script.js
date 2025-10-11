@@ -1,3 +1,32 @@
+const mainMenuPage = document.getElementById("mainMenuPage");
+const gamePage = document.getElementById("gamePage");
+const startButton = document.getElementById("startButton");
+
+const shirtAndPantsButton = document.getElementById("shirtAndPantsButton");
+const pantsAndShoesBUtton = document.getElementById("pantsAndShoesButton");
+let shirtAndPantsIcon = document.getElementById("shirtAndPantsIcon");
+let pantsAndShoesIcon = document.getElementById("pantsAndShoesIcon");
+
+const shirtAndPantsLayers =
+{
+    "shirtInFront" : "assets/dress_up_layer_icons/shirt_over_pants_icon.png",
+    "pantsInFront" : "assets/dress_up_layer_icons/pants_over_shirt_icon.png"
+}
+
+const pantsAndShoesLayers =
+{
+    "pantsInFront" : "assets/dress_up_layer_icons/pants_over_shoes_icon.png",
+    "shoesInFront" : "assets/dress_up_layer_icons/shoes_over_pants_icon.png"
+}
+
+const zoomCheckbox = document.getElementById("zoomCheckbox");
+const doneButton = document.getElementById("doneButton");
+const popUpMessage = document.getElementById("popUpMessage");
+const restartGameButton = document.getElementById("restartGameButton");
+const closetContainer = document.getElementById("closetContainer");
+const characterContainer = document.getElementById("characterContainer");
+const widthLimit = window.matchMedia("(max-width: 850px)");
+
 const optionButton = document.getElementsByClassName("optionButton");
 
 const skinButton = document.getElementById("skinButton");
@@ -142,6 +171,136 @@ const sfxPics =
 }
 
 const allButtons = document.getElementsByTagName("button");
+
+if (startButton) {
+    startButton.addEventListener("click", event => {
+        mainMenuPage.style.display = "none";
+        gamePage.style.display = "block";
+    })
+}
+
+if (zoomCheckbox) {
+    zoomCheckbox.addEventListener("click", event => {
+        if (zoomCheckbox.checked) {
+            shirtAndPantsButton.style.display = "none";
+            pantsAndShoesButton.style.display = "none";
+            doneButton.style.display = "none";
+        }
+        else {
+            shirtAndPantsButton.style.display = "block";
+            pantsAndShoesButton.style.display = "block";
+            doneButton.style.display = "block";
+        }
+    })
+}
+
+if (shirtAndPantsButton) {
+    shirtAndPantsButton.addEventListener("click", event => {
+        let shirtLayer = parseInt(window.getComputedStyle(shirt).getPropertyValue("z-index"));
+        let pantsLayer = parseInt(window.getComputedStyle(pants).getPropertyValue("z-index"));
+        let newShirtLayer = 0;
+        if (shirtLayer > pantsLayer) {
+            newShirtLayer = shirtLayer - 2;
+            shirtAndPantsIcon.src = shirtAndPantsLayers["pantsInFront"];
+        }
+        else {
+            newShirtLayer = shirtLayer + 2;
+            shirtAndPantsIcon.src = shirtAndPantsLayers["shirtInFront"];
+        }
+        console.log(newShirtLayer);
+        shirt.style.zIndex = newShirtLayer.toString();
+    })
+}
+
+if (pantsAndShoesButton) {
+    pantsAndShoesButton.addEventListener("click", event => {
+        let pantsLayer = parseInt(window.getComputedStyle(pants).getPropertyValue("z-index"));
+        let shoesLayer = parseInt(window.getComputedStyle(shoes).getPropertyValue("z-index"));
+        let newShoesLayer = 0;
+        if (pantsLayer > shoesLayer) {
+            newShoesLayer = shoesLayer + 2;
+            pantsAndShoesIcon.src = pantsAndShoesLayers["shoesInFront"];
+        }
+        else {
+            newShoesLayer = shoesLayer - 2;
+            pantsAndShoesIcon.src = pantsAndShoesLayers["pantsInFront"];
+        }
+        shoes.style.zIndex = newShoesLayer.toString();
+    })
+}
+
+function fullyClothed() {
+    if (shirt.style.display == "none" && dress.style.display == "none") {
+        popUpMessage.innerHTML = "You don't have a shirt on!";
+    }
+    else if (pants.style.display == "none" && dress.style.display == "none") {
+        popUpMessage.innerHTML = "You don't have pants on!";
+    }
+    else if (shoes.style.display == "none") {
+        popUpMessage.innerHTML = "You don't have any shoes on!";
+    }
+    else {
+        popUpMessage.innerHTML = "";
+        popUpMessage.style.display = "none";
+    }
+
+    if (popUpMessage.innerHTML == "") {
+        return true;
+    }
+
+    popUpMessage.style.display = "block";
+    popUpMessage.style.cssText = "animation:fadeIn 0.5s ease;";
+    setTimeout(function() {
+        popUpMessage.style.cssText = "animation:fadeOut 0.5s ease; animation-fill-mode: forwards";
+    }, 5000);
+    return false;
+}
+
+if (doneButton) {
+    doneButton.addEventListener("click", event => {
+        if (!fullyClothed()) {
+            return;
+        }
+        if (!widthLimit.matches) {
+            closetContainer.style.cssText = "animation:slideOut .5s ease; animation-fill-mode: forwards;";
+            setTimeout(function() {
+                closetContainer.style.display = "none";
+            }, 700);
+            characterContainer.style.cssText = "animation:slideIn .5s ease; animation-fill-mode: forwards";
+        }
+        else {
+            closetContainer.style.cssText = "animation:slideDown .5s ease; animation-fill-mode: forwards;";
+            setTimeout(function() {
+                closetContainer.style.display = "none";
+            }, 700);
+            characterContainer.style.cssText = "animation:stretchOut .5s ease; animation-fill-mode: forwards";
+        }
+        zoomCheckbox.disabled = true;
+        shirtAndPantsButton.style.display = "none";
+        pantsAndShoesButton.style.display = "none";
+        doneButton.style.display = "none";
+        restartGameButton.style.display = "block";
+    })
+}
+
+if (restartGameButton) {
+    restartGameButton.addEventListener("click", event => {
+        resetAllClothes();
+        closetContainer.style.display = "flex";
+        closetContainer.style.animation = "none";
+        document.querySelector(".selected")?.classList.remove("selected");
+        optionButton[0].classList.add("selected");
+        displayCurrentSelection("skinSelection")
+        characterContainer.style.animation = "none";
+        zoomCheckbox.disabled = false;
+        shirtAndPantsButton.style.display = "block";
+        pantsAndShoesButton.style.display = "block";
+        doneButton.style.display = "block";
+        restartGameButton.style.display = "none";
+        gamePage.style.display = "none";
+        mainMenuPage.style.display = "block";
+    })
+}
 
 optionButton[0].classList.add("selected");
 if (optionButton) {
@@ -310,13 +469,17 @@ if (resetSectionButton) {
     }
 }
 
+function resetAllClothes() {
+    for (let i = 0; i < fullOutfit.length; i++) {
+        fullOutfit[i].style.display = "none";
+    }
+    frontHair.style.display = "none";
+}
+
 if (resetAllButton) {
     for (let i = 0; i < resetAllButton.length; i++) {
         resetAllButton[i].addEventListener("click", event => {
-            for (let k = 0; k < fullOutfit.length; k++) {
-                fullOutfit[k].style.display = "none";
-            }
-            frontHair.style.display = "none";
+            resetAllClothes();
         })
     }
 }
