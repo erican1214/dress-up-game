@@ -18,7 +18,12 @@ body {
     overflow: hidden;
 }
 
+p {
+    font-size: 15px;
+}
+
 button {
+    font-size: 15px;
     transition: all 0.3s ease;
 }
 
@@ -140,48 +145,40 @@ button img {
     cursor: zoom-out;
 }
 
-#mainBody,
-#hair,
-#socks,
-#shoes,
-#pants,
-#shirt,
-#dress,
-#frontHair {
-    position: absolute;
-}
-
-#mainBody {
+#background {
     z-index: 0;
 }
 
-#hair {
+#mainBody {
     z-index: 1;
 }
 
-#socks {
+#hair {
     z-index: 2;
 }
 
-#shoes {
+#socks {
     z-index: 3;
 }
 
-#pants {
+#shoes {
     z-index: 4;
 }
 
-#shirt {
+#pants {
     z-index: 5;
 }
 
-#dress {
+#shirt {
     z-index: 6;
 }
 
-#frontHair {
-    position: relative;
+#dress {
     z-index: 7;
+}
+
+#frontHair {
+    z-index: 8;
 }
 
 #shirtAndPantsButton {
@@ -236,12 +233,10 @@ button img {
     border: none;
     border-radius: 10px;
     padding: 5px;
-    font-size: 15px;
     animation: fadeIn 0.5s ease;
 }
 
 #restartGameButton {
-    font-size: 15px;
     padding: 10px;
     background-color: lightgoldenrodyellow;
     border-radius: 5px;
@@ -290,7 +285,6 @@ button img {
     width: 100%;
     height: fit-content;
     justify-content: space-evenly;
-    font-size: 15px;
     background-color: lightgoldenrodyellow;
     padding: 10px;
     border-top-left-radius: 5px;
@@ -328,6 +322,7 @@ button img {
     gap: 10px;
     width: 100%;
     height: fit-content;
+    padding: 5px;
 }
 
 .selection input[type="image"] {
@@ -336,14 +331,14 @@ button img {
     width: 100px;
     height: 100px;
     aspect-ratio: 1 / 1;
-    background-color: lightblue;
+    background-color: lightgoldenrodyellow;
     border: none;
     border-radius: 10px;
     object-fit: contain;
     box-shadow: 1px 1px 3px peachpuff;
 }
 
-input[type="image"]:focus {
+.selection input[type="image"]:focus {
     opacity: 0.6;
 }
 
@@ -359,7 +354,6 @@ input[type="image"]:focus {
 
 .resetSectionButton,
 .resetAllButton {
-    font-size: 15px;
     padding: 10px;
     background-color: lightgoldenrodyellow;
     border-radius: 5px;

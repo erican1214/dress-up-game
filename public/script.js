@@ -1,6 +1,7 @@
 const mainMenuPage = document.getElementById("mainMenuPage");
 const gamePage = document.getElementById("gamePage");
 const startButton = document.getElementById("startButton");
+let header = document.getElementById("header");
 
 const shirtAndPantsButton = document.getElementById("shirtAndPantsButton");
 const pantsAndShoesBUtton = document.getElementById("pantsAndShoesButton");
@@ -36,6 +37,7 @@ const pantsButton = document.getElementById("pantsButton");
 const dressButton = document.getElementById("dressButton");
 const sockButton = document.getElementById("sockButton");
 const shoeButton = document.getElementById("shoeButton");
+const backgroundButton = document.getElementById("backgroundButton");
 let allSelections = document.getElementsByClassName("selectionContainer");
 
 let skinOptions = document.getElementsByClassName("skinOptions");
@@ -45,6 +47,7 @@ let shirtOptions = document.getElementsByClassName("shirtOptions");
 let dressOptions = document.getElementsByClassName("dressOptions");
 let sockOptions = document.getElementsByClassName("sockOptions");
 let shoeOptions = document.getElementsByClassName("shoeOptions");
+let backgroundOptions = document.getElementsByClassName("backgroundOptions");
 
 const skinList =
 [
@@ -144,8 +147,9 @@ let dress = document.getElementById("dress");
 let frontHair = document.getElementById("frontHair");
 let socks = document.getElementById("socks");
 let shoes = document.getElementById("shoes");
+let background = document.getElementById("background");
 
-const fullOutfit = [hair, shirt, pants, dress, socks, shoes];
+const fullOutfit = [hair, shirt, pants, dress, socks, shoes, background];
 
 const resetSectionButton = document.getElementsByClassName("resetSectionButton");
 const resetAllButton = document.getElementsByClassName("resetAllButton");
@@ -290,6 +294,7 @@ if (doneButton) {
             }, 500);
             characterContainer.style.cssText = "animation:stretchOut .5s ease; animation-fill-mode: forwards";
         }
+        header.innerHTML = "Wow! I look amazing!"
         zoomCheckbox.disabled = true;
         shirtAndPantsButton.style.display = "none";
         pantsAndShoesButton.style.display = "none";
@@ -303,6 +308,7 @@ if (restartGameButton) {
         fadeInAndOutPages(gamePage, mainMenuPage);
         setTimeout(function() {
             resetAllClothes();
+            header.innerHTML = "What should I wear today?"
             closetContainer.style.display = "flex";
             closetContainer.style.animation = "none";
             document.querySelector(".selected")?.classList.remove("selected");
@@ -330,7 +336,7 @@ if (optionButton) {
 
 function displayCurrentSelection(selection) {
     for (let i = 0; i < allSelections.length; i++) {
-        if (allSelections[i].getAttribute('id') === selection) {
+        if (allSelections[i].getAttribute('id') == selection) {
             allSelections[i].style.display = "flex";
         }
         else {
@@ -379,6 +385,12 @@ if (shoeButton) {
     shoeButton.addEventListener("click", event => {
         displayCurrentSelection("shoeSelection")
     });
+}
+
+if (backgroundButton) {
+    backgroundButton.addEventListener("click", event => {
+        displayCurrentSelection("backgroundSelection");
+    })
 }
 
 if (skinOptions) {
@@ -469,6 +481,16 @@ if (shoeOptions) {
         shoeOptions[i].addEventListener("click", event => {
             shoes.style.display = "block";
             shoes.src = shoeList[i];
+            playSFX();
+        })
+    }
+}
+
+if (backgroundOptions) {
+    for (let i = 0; i < backgroundOptions.length; i++) {
+        backgroundOptions[i].addEventListener("click", event => {
+            background.style.display = "block";
+            background.src = backgroundOptions[i].src;
             playSFX();
         })
     }
