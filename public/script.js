@@ -172,10 +172,25 @@ const sfxPics =
 
 const allButtons = document.getElementsByTagName("button");
 
+function timer(ms) {
+    return new Promise(res => setTimeout(res, ms));
+}
+
+async function fadeInAndOutPages(page1, page2) {
+    page1.style.animation = "none";
+    page2.style.animation = "none";
+    await timer(100);
+    page1.style.cssText = "animation:fadeOut 0.5s ease; animation-fill-mode: forwards";
+    await timer(500);
+    page1.style.display = "none";
+    page2.style.cssText = "animation:fadeIn 0.5s ease; animation-fill-mode: forwards";
+    await timer(500);
+    page2.style.display = "flex";
+}
+
 if (startButton) {
     startButton.addEventListener("click", event => {
-        mainMenuPage.style.display = "none";
-        gamePage.style.display = "block";
+        fadeInAndOutPages(mainMenuPage, gamePage);
     })
 }
 
@@ -265,14 +280,14 @@ if (doneButton) {
             closetContainer.style.cssText = "animation:slideOut .5s ease; animation-fill-mode: forwards;";
             setTimeout(function() {
                 closetContainer.style.display = "none";
-            }, 700);
+            }, 500);
             characterContainer.style.cssText = "animation:slideIn .5s ease; animation-fill-mode: forwards";
         }
         else {
             closetContainer.style.cssText = "animation:slideDown .5s ease; animation-fill-mode: forwards;";
             setTimeout(function() {
                 closetContainer.style.display = "none";
-            }, 700);
+            }, 500);
             characterContainer.style.cssText = "animation:stretchOut .5s ease; animation-fill-mode: forwards";
         }
         zoomCheckbox.disabled = true;
@@ -285,20 +300,21 @@ if (doneButton) {
 
 if (restartGameButton) {
     restartGameButton.addEventListener("click", event => {
-        resetAllClothes();
-        closetContainer.style.display = "flex";
-        closetContainer.style.animation = "none";
-        document.querySelector(".selected")?.classList.remove("selected");
-        optionButton[0].classList.add("selected");
-        displayCurrentSelection("skinSelection")
-        characterContainer.style.animation = "none";
-        zoomCheckbox.disabled = false;
-        shirtAndPantsButton.style.display = "block";
-        pantsAndShoesButton.style.display = "block";
-        doneButton.style.display = "block";
-        restartGameButton.style.display = "none";
-        gamePage.style.display = "none";
-        mainMenuPage.style.display = "block";
+        fadeInAndOutPages(gamePage, mainMenuPage);
+        setTimeout(function() {
+            resetAllClothes();
+            closetContainer.style.display = "flex";
+            closetContainer.style.animation = "none";
+            document.querySelector(".selected")?.classList.remove("selected");
+            optionButton[0].classList.add("selected");
+            displayCurrentSelection("skinSelection")
+            characterContainer.style.animation = "none";
+            zoomCheckbox.disabled = false;
+            shirtAndPantsButton.style.display = "block";
+            pantsAndShoesButton.style.display = "block";
+            doneButton.style.display = "block";
+            restartGameButton.style.display = "none";
+        }, 1100);
     })
 }
 
