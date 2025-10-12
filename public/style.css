@@ -252,6 +252,26 @@ button img {
     transform-origin: bottom right;
 }
 
+#downloadButton {
+    position: absolute;
+    width: 100px;
+    height: fit-content;
+    bottom: 5px;
+    left: 5px;
+    padding: 10px;
+    background-color: lightgoldenrodyellow;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 1px;
+    transform-origin: bottom left;
+    z-index: 98;
+}
+
+#downloadLink {
+    text-decoration: none;
+    color: black;
+}
+
 #closetContainer {
     position: relative;
     display: flex;
@@ -504,6 +524,13 @@ button img {
     .selection input[type="image"] {
         width: 70px;
         height: 70px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    #doneContainer,
+    #downloadButton {
+        width: 45%;
     }
 }
 

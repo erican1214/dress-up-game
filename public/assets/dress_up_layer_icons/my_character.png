@@ -50,7 +50,7 @@
                         <img id="socks" style="display:none">
                         <img id="shoes" style="display:none">
                         <img id="background" style="display:none">
-                        <canvas id="canvas" style="display:none"></canvas>
+                        <!-- <canvas id="canvas"></canvas> -->
                     </label>
                 </div>
                 <div id="closetContainer">

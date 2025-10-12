@@ -1,8 +1,35 @@
+// Variables and event listeners to switch between
+// main menu and game page
 const mainMenuPage = document.getElementById("mainMenuPage");
 const gamePage = document.getElementById("gamePage");
 const startButton = document.getElementById("startButton");
 let header = document.getElementById("header");
 
+function timer(ms) {
+    return new Promise(res => setTimeout(res, ms));
+}
+
+// Fades out first page and fades in second page
+// Async timer to allow time for animation in between
+async function fadeInAndOutPages(page1, page2) {
+    page1.style.animation = "none";
+    page2.style.animation = "none";
+    await timer(100);
+    page1.style.cssText = "animation:fadeOut 0.5s ease; animation-fill-mode: forwards";
+    await timer(500);
+    page1.style.display = "none";
+    page2.style.cssText = "animation:fadeIn 0.5s ease; animation-fill-mode: forwards";
+    await timer(500);
+    page2.style.display = "flex";
+}
+
+if (startButton) {
+    startButton.addEventListener("click", event => {
+        fadeInAndOutPages(mainMenuPage, gamePage);
+    })
+}
+
+// Icons to switch shirt, pants, and shoe layers
 const shirtAndPantsButton = document.getElementById("shirtAndPantsButton");
 const pantsAndShoesBUtton = document.getElementById("pantsAndShoesButton");
 let shirtAndPantsIcon = document.getElementById("shirtAndPantsIcon");
@@ -20,16 +47,127 @@ const pantsAndShoesLayers =
     "shoesInFront" : "assets/dress_up_layer_icons/shoes_over_pants_icon.png"
 }
 
+// Zooms into character's outfit
 const zoomCheckbox = document.getElementById("zoomCheckbox");
-const doneButton = document.getElementById("doneButton");
-const popUpMessage = document.getElementById("popUpMessage");
-const restartGameButton = document.getElementById("restartGameButton");
-const closetContainer = document.getElementById("closetContainer");
-const characterContainer = document.getElementById("characterContainer");
-const widthLimit = window.matchMedia("(max-width: 850px)");
 
+if (shirtAndPantsButton) {
+    shirtAndPantsButton.addEventListener("click", event => {
+        let shirtLayer = parseInt(window.getComputedStyle(shirt).getPropertyValue("z-index"));
+        let pantsLayer = parseInt(window.getComputedStyle(pants).getPropertyValue("z-index"));
+        let newShirtLayer = 0;
+        if (shirtLayer > pantsLayer) {
+            newShirtLayer = shirtLayer - 2;
+            shirtAndPantsIcon.src = shirtAndPantsLayers["pantsInFront"];
+        }
+        else {
+            newShirtLayer = shirtLayer + 2;
+            shirtAndPantsIcon.src = shirtAndPantsLayers["shirtInFront"];
+        }
+        console.log(newShirtLayer);
+        shirt.style.zIndex = newShirtLayer.toString();
+    })
+}
+
+if (pantsAndShoesButton) {
+    pantsAndShoesButton.addEventListener("click", event => {
+        let pantsLayer = parseInt(window.getComputedStyle(pants).getPropertyValue("z-index"));
+        let shoesLayer = parseInt(window.getComputedStyle(shoes).getPropertyValue("z-index"));
+        let newShoesLayer = 0;
+        if (pantsLayer > shoesLayer) {
+            newShoesLayer = shoesLayer + 2;
+            pantsAndShoesIcon.src = pantsAndShoesLayers["shoesInFront"];
+        }
+        else {
+            newShoesLayer = shoesLayer - 2;
+            pantsAndShoesIcon.src = pantsAndShoesLayers["pantsInFront"];
+        }
+        shoes.style.zIndex = newShoesLayer.toString();
+    })
+}
+
+if (zoomCheckbox) {
+    zoomCheckbox.addEventListener("click", event => {
+        if (zoomCheckbox.checked) {
+            shirtAndPantsButton.style.display = "none";
+            pantsAndShoesButton.style.display = "none";
+            doneButton.style.display = "none";
+        }
+        else {
+            shirtAndPantsButton.style.display = "block";
+            pantsAndShoesButton.style.display = "block";
+            doneButton.style.display = "block";
+        }
+    })
+}
+
+// Variables and event listeners for music and sound buttons
+const backgroundMusic = document.getElementById("backgroundMusic");
+const clickSound = document.getElementById("clickSound");
+
+const musicButton = document.getElementById("musicButton");
+const sfxButton = document.getElementById("sfxButton");
+let musicIcon = document.getElementById("musicIcon");
+let sfxIcon = document.getElementById("sfxIcon");
+
+const musicPics =
+{
+    "unmuted" : "assets/audio_icons/music_icon.png",
+    "muted" : "assets/audio_icons/music_muted_icon.png"
+}
+
+const sfxPics =
+{
+    "unmuted" : "assets/audio_icons/sfx_icon.png",
+    "muted" : "assets/audio_icons/sfx_muted_icon.png"
+}
+
+const allButtons = document.getElementsByTagName("button");
+
+if (musicButton) {
+    musicButton.addEventListener("click", event => {
+        if (backgroundMusic.muted) {
+            backgroundMusic.muted = false;
+            backgroundMusic.play();
+            musicIcon.src = musicPics["unmuted"];
+        }
+        else {
+            backgroundMusic.muted = true;
+            backgroundMusic.pause();
+            musicIcon.src = musicPics["muted"];
+        }
+    })
+}
+
+if (sfxButton) {
+    sfxButton.addEventListener("click", event => {
+        if (clickSound.muted) {
+            clickSound.muted = false;
+            sfxIcon.src = sfxPics["unmuted"];
+        }
+        else {
+            clickSound.muted = true;
+            sfxIcon.src = sfxPics["muted"];
+        };
+    })
+}
+
+if (allButtons) {
+    for (let i = 0; i < allButtons.length; i++) {
+        allButtons[i].addEventListener("click", event => {
+            playSFX();
+        })
+    }
+}
+
+function playSFX() {
+    if (!clickSound.muted) {
+        clickSound.currentTime = 0;
+        clickSound.play();
+    }
+}
+
+// Buttons for each section
 const optionButton = document.getElementsByClassName("optionButton");
-
 const skinButton = document.getElementById("skinButton");
 const hairButton = document.getElementById("hairButton");
 const shirtButton = document.getElementById("shirtButton");
@@ -38,8 +176,11 @@ const dressButton = document.getElementById("dressButton");
 const sockButton = document.getElementById("sockButton");
 const shoeButton = document.getElementById("shoeButton");
 const backgroundButton = document.getElementById("backgroundButton");
+
+// List of all containers for each section
 let allSelections = document.getElementsByClassName("selectionContainer");
 
+// Individual options in each section
 let skinOptions = document.getElementsByClassName("skinOptions");
 let hairOptions = document.getElementsByClassName("hairOptions");
 let pantsOptions = document.getElementsByClassName("pantsOptions");
@@ -49,6 +190,7 @@ let sockOptions = document.getElementsByClassName("sockOptions");
 let shoeOptions = document.getElementsByClassName("shoeOptions");
 let backgroundOptions = document.getElementsByClassName("backgroundOptions");
 
+// List of images for each section
 const skinList =
 [
     "assets/dress_up_elements/skins/skin_1.png",
@@ -139,6 +281,7 @@ const shoeList =
     "assets/dress_up_elements/shoes/shoes_7.png"
 ];
 
+// Variables to keep track of user's choices in each section
 let mainBody = document.getElementById("mainBody");
 let hair = document.getElementById("hair");
 let pants = document.getElementById("pants");
@@ -149,180 +292,12 @@ let socks = document.getElementById("socks");
 let shoes = document.getElementById("shoes");
 let background = document.getElementById("background");
 
-const fullOutfit = [hair, shirt, pants, dress, socks, shoes, background];
-
-const resetSectionButton = document.getElementsByClassName("resetSectionButton");
-const resetAllButton = document.getElementsByClassName("resetAllButton");
-
-const backgroundMusic = document.getElementById("backgroundMusic");
-const clickSound = document.getElementById("clickSound");
-
-const musicButton = document.getElementById("musicButton");
-const sfxButton = document.getElementById("sfxButton");
-let musicIcon = document.getElementById("musicIcon");
-let sfxIcon = document.getElementById("sfxIcon");
-
-const musicPics =
-{
-    "unmuted" : "assets/audio_icons/music_icon.png",
-    "muted" : "assets/audio_icons/music_muted_icon.png"
-}
-
-const sfxPics =
-{
-    "unmuted" : "assets/audio_icons/sfx_icon.png",
-    "muted" : "assets/audio_icons/sfx_muted_icon.png"
-}
-
-const allButtons = document.getElementsByTagName("button");
-
-function timer(ms) {
-    return new Promise(res => setTimeout(res, ms));
-}
-
-async function fadeInAndOutPages(page1, page2) {
-    page1.style.animation = "none";
-    page2.style.animation = "none";
-    await timer(100);
-    page1.style.cssText = "animation:fadeOut 0.5s ease; animation-fill-mode: forwards";
-    await timer(500);
-    page1.style.display = "none";
-    page2.style.cssText = "animation:fadeIn 0.5s ease; animation-fill-mode: forwards";
-    await timer(500);
-    page2.style.display = "flex";
-}
-
-if (startButton) {
-    startButton.addEventListener("click", event => {
-        fadeInAndOutPages(mainMenuPage, gamePage);
-    })
-}
-
-if (zoomCheckbox) {
-    zoomCheckbox.addEventListener("click", event => {
-        if (zoomCheckbox.checked) {
-            shirtAndPantsButton.style.display = "none";
-            pantsAndShoesButton.style.display = "none";
-            doneButton.style.display = "none";
-        }
-        else {
-            shirtAndPantsButton.style.display = "block";
-            pantsAndShoesButton.style.display = "block";
-            doneButton.style.display = "block";
-        }
-    })
-}
-
-if (shirtAndPantsButton) {
-    shirtAndPantsButton.addEventListener("click", event => {
-        let shirtLayer = parseInt(window.getComputedStyle(shirt).getPropertyValue("z-index"));
-        let pantsLayer = parseInt(window.getComputedStyle(pants).getPropertyValue("z-index"));
-        let newShirtLayer = 0;
-        if (shirtLayer > pantsLayer) {
-            newShirtLayer = shirtLayer - 2;
-            shirtAndPantsIcon.src = shirtAndPantsLayers["pantsInFront"];
-        }
-        else {
-            newShirtLayer = shirtLayer + 2;
-            shirtAndPantsIcon.src = shirtAndPantsLayers["shirtInFront"];
-        }
-        console.log(newShirtLayer);
-        shirt.style.zIndex = newShirtLayer.toString();
-    })
-}
-
-if (pantsAndShoesButton) {
-    pantsAndShoesButton.addEventListener("click", event => {
-        let pantsLayer = parseInt(window.getComputedStyle(pants).getPropertyValue("z-index"));
-        let shoesLayer = parseInt(window.getComputedStyle(shoes).getPropertyValue("z-index"));
-        let newShoesLayer = 0;
-        if (pantsLayer > shoesLayer) {
-            newShoesLayer = shoesLayer + 2;
-            pantsAndShoesIcon.src = pantsAndShoesLayers["shoesInFront"];
-        }
-        else {
-            newShoesLayer = shoesLayer - 2;
-            pantsAndShoesIcon.src = pantsAndShoesLayers["pantsInFront"];
-        }
-        shoes.style.zIndex = newShoesLayer.toString();
-    })
-}
-
-function fullyClothed() {
-    if (shirt.style.display == "none" && dress.style.display == "none") {
-        popUpMessage.innerHTML = "You don't have a shirt on!";
-    }
-    else if (pants.style.display == "none" && dress.style.display == "none") {
-        popUpMessage.innerHTML = "You don't have pants on!";
-    }
-    else if (shoes.style.display == "none") {
-        popUpMessage.innerHTML = "You don't have any shoes on!";
-    }
-    else {
-        popUpMessage.innerHTML = "";
-        popUpMessage.style.display = "none";
-    }
-
-    if (popUpMessage.innerHTML == "") {
-        return true;
-    }
-
-    popUpMessage.style.display = "block";
-    popUpMessage.style.cssText = "animation:fadeIn 0.5s ease;";
-    setTimeout(function() {
-        popUpMessage.style.cssText = "animation:fadeOut 0.5s ease; animation-fill-mode: forwards";
-    }, 5000);
-    return false;
-}
-
-if (doneButton) {
-    doneButton.addEventListener("click", event => {
-        if (!fullyClothed()) {
-            return;
-        }
-        if (!widthLimit.matches) {
-            closetContainer.style.cssText = "animation:slideOut .5s ease; animation-fill-mode: forwards;";
-            setTimeout(function() {
-                closetContainer.style.display = "none";
-            }, 500);
-            characterContainer.style.cssText = "animation:slideIn .5s ease; animation-fill-mode: forwards";
-        }
-        else {
-            closetContainer.style.cssText = "animation:slideDown .5s ease; animation-fill-mode: forwards;";
-            setTimeout(function() {
-                closetContainer.style.display = "none";
-            }, 500);
-            characterContainer.style.cssText = "animation:stretchOut .5s ease; animation-fill-mode: forwards";
-        }
-        header.innerHTML = "Wow! I look amazing!"
-        zoomCheckbox.disabled = true;
-        shirtAndPantsButton.style.display = "none";
-        pantsAndShoesButton.style.display = "none";
-        doneButton.style.display = "none";
-        restartGameButton.style.display = "block";
-    })
-}
-
-if (restartGameButton) {
-    restartGameButton.addEventListener("click", event => {
-        fadeInAndOutPages(gamePage, mainMenuPage);
-        setTimeout(function() {
-            resetAllClothes();
-            header.innerHTML = "What should I wear today?"
-            closetContainer.style.display = "flex";
-            closetContainer.style.animation = "none";
-            document.querySelector(".selected")?.classList.remove("selected");
-            optionButton[0].classList.add("selected");
-            displayCurrentSelection("skinSelection")
-            characterContainer.style.animation = "none";
-            zoomCheckbox.disabled = false;
-            shirtAndPantsButton.style.display = "block";
-            pantsAndShoesButton.style.display = "block";
-            doneButton.style.display = "block";
-            restartGameButton.style.display = "none";
-        }, 1100);
-    })
-}
+// fullOutfit list is for sections that can be displayed/hidden
+// (mainBody is never hidden)
+// fullOutfitInOrder list has every section from lowest layer
+// to highest layer in case I need to loop through ever section
+const fullOutfit = [background, hair, shirt, pants, dress, socks, shoes];
+const fullOutfitInOrder = [background, mainBody, hair, socks, shoes, pants, shirt, dress, frontHair];
 
 optionButton[0].classList.add("selected");
 if (optionButton) {
@@ -496,6 +471,11 @@ if (backgroundOptions) {
     }
 }
 
+// Variables and event listeners to reset individual sections
+// or entire character
+const resetSectionButton = document.getElementsByClassName("resetSectionButton");
+const resetAllButton = document.getElementsByClassName("resetAllButton");
+
 if (resetSectionButton) {
     for (let i = 0; i < resetSectionButton.length; i++) {
         resetSectionButton[i].addEventListener("click", event => {
@@ -507,13 +487,6 @@ if (resetSectionButton) {
     }
 }
 
-function resetAllClothes() {
-    for (let i = 0; i < fullOutfit.length; i++) {
-        fullOutfit[i].style.display = "none";
-    }
-    frontHair.style.display = "none";
-}
-
 if (resetAllButton) {
     for (let i = 0; i < resetAllButton.length; i++) {
         resetAllButton[i].addEventListener("click", event => {
@@ -522,45 +495,166 @@ if (resetAllButton) {
     }
 }
 
-if (musicButton) {
-    musicButton.addEventListener("click", event => {
-        if (backgroundMusic.muted) {
-            backgroundMusic.muted = false;
-            backgroundMusic.play();
-            musicIcon.src = musicPics["unmuted"];
+function resetAllClothes() {
+    for (let i = 0; i < fullOutfit.length; i++) {
+        fullOutfit[i].style.display = "none";
+    }
+    frontHair.style.display = "none";
+}
+
+// List of variables and event listeners when user is finished
+// with customizing their character
+const doneButton = document.getElementById("doneButton");
+const popUpMessage = document.getElementById("popUpMessage");
+const restartGameButton = document.getElementById("restartGameButton");
+
+// closetContainer and characterContainer extracted for animation
+// purposes
+const closetContainer = document.getElementById("closetContainer");
+const characterContainer = document.getElementById("characterContainer");
+const widthLimit = window.matchMedia("(max-width: 850px)");
+
+const downloadButton = document.getElementById("downloadButton");
+const downloadLink = document.getElementById("downloadLink");
+const canvas = document.getElementById("canvas");
+const context = canvas.getContext("2d");
+
+// Checks if user is fully clothed before done button executes
+// Must have shirt and pants and shoes OR dress and shoes
+function fullyClothed() {
+    if (shirt.style.display == "none" && dress.style.display == "none") {
+        popUpMessage.innerHTML = "You don't have a shirt on!";
+    }
+    else if (pants.style.display == "none" && dress.style.display == "none") {
+        popUpMessage.innerHTML = "You don't have pants on!";
+    }
+    else if (shoes.style.display == "none") {
+        popUpMessage.innerHTML = "You don't have any shoes on!";
+    }
+    else {
+        popUpMessage.innerHTML = "";
+        popUpMessage.style.display = "none";
+    }
+
+    if (popUpMessage.innerHTML == "") {
+        return true;
+    }
+
+    popUpMessage.style.display = "block";
+    popUpMessage.style.cssText = "animation:fadeIn 0.5s ease;";
+    setTimeout(function() {
+        popUpMessage.style.cssText = "animation:fadeOut 0.5s ease; animation-fill-mode: forwards";
+    }, 5000);
+    return false;
+}
+
+// closetContainer is removed when user is finished
+// Different animation styles depending on media screen size
+// Calls function to create a downloadable file of user's
+// character
+// Displays download and restart buttons
+if (doneButton) {
+    doneButton.addEventListener("click", event => {
+        if (!fullyClothed()) {
+            return;
+        }
+        if (!widthLimit.matches) {
+            closetContainer.style.cssText = "animation:slideOut .5s ease; animation-fill-mode: forwards;";
+            setTimeout(function() {
+                closetContainer.style.display = "none";
+            }, 500);
+            characterContainer.style.cssText = "animation:slideIn .5s ease; animation-fill-mode: forwards";
         }
         else {
-            backgroundMusic.muted = true;
-            backgroundMusic.pause();
-            musicIcon.src = musicPics["muted"];
+            closetContainer.style.cssText = "animation:slideDown .5s ease; animation-fill-mode: forwards;";
+            setTimeout(function() {
+                closetContainer.style.display = "none";
+            }, 500);
+            characterContainer.style.cssText = "animation:stretchOut .5s ease; animation-fill-mode: forwards";
         }
+        header.innerHTML = "Wow! I look amazing!"
+        zoomCheckbox.disabled = true;
+        shirtAndPantsButton.style.display = "none";
+        pantsAndShoesButton.style.display = "none";
+        doneButton.style.display = "none";
+
+        createDownloadImage();
+        restartGameButton.style.display = "block";
+        downloadButton.style.display = "block";
     })
 }
 
-if (sfxButton) {
-    sfxButton.addEventListener("click", event => {
-        if (clickSound.muted) {
-            clickSound.muted = false;
-            sfxIcon.src = sfxPics["unmuted"];
-        }
-        else {
-            clickSound.muted = true;
-            sfxIcon.src = sfxPics["muted"];
-        };
+// Function to draw user's choices on canvas to download
+// as one png file
+function createDownloadImage() {
+    canvas.width = 500;
+    canvas.height = 900;
+
+    drawOnCanvas(background);
+    drawOnCanvas(mainBody);
+    drawOnCanvas(hair);
+    drawOnCanvas(socks);
+    
+    let shirtLayer = parseInt(window.getComputedStyle(shirt).getPropertyValue("z-index"));
+    let pantsLayer = parseInt(window.getComputedStyle(pants).getPropertyValue("z-index"));
+    let shoeLayer = parseInt(window.getComputedStyle(shoes).getPropertyValue("z-index"));
+
+    if (shirtLayer > pantsLayer && pantsLayer > shoeLayer) {
+        drawOnCanvas(shoes);
+        drawOnCanvas(pants);
+        drawOnCanvas(shirt);
+    }
+    else if (shirtLayer < pantsLayer && pantsLayer < shoeLayer) {
+        drawOnCanvas(shirt);
+        drawOnCanvas(pants);
+        drawOnCanvas(shoes);
+    }
+    else if (shirtLayer > pantsLayer && pantsLayer < shoeLayer) {
+        drawOnCanvas(pants);
+        drawOnCanvas(shoes);
+        drawOnCanvas(shirt);
+    }
+    else {
+        drawOnCanvas(shoes);
+        drawOnCanvas(shirt);
+        drawOnCanvas(pants);
+    }
+
+    drawOnCanvas(dress);
+    drawOnCanvas(frontHair);
+
+    const pngDataUrl = canvas.toDataURL("image/png");
+    console.log(pngDataUrl);
+
+    downloadLink.href = pngDataUrl;
+}
+
+function drawOnCanvas(image) {
+    if (image.style.display != "none") {
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+    }
+}
+
+// Restart button brings user back to main menu and resets
+// most components
+if (restartGameButton) {
+    restartGameButton.addEventListener("click", event => {
+        fadeInAndOutPages(gamePage, mainMenuPage);
+        setTimeout(function() {
+            resetAllClothes();
+            header.innerHTML = "What should I wear today?"
+            closetContainer.style.display = "flex";
+            closetContainer.style.animation = "none";
+            document.querySelector(".selected")?.classList.remove("selected");
+            optionButton[0].classList.add("selected");
+            displayCurrentSelection("skinSelection")
+            characterContainer.style.animation = "none";
+            zoomCheckbox.disabled = false;
+            shirtAndPantsButton.style.display = "block";
+            pantsAndShoesButton.style.display = "block";
+            doneButton.style.display = "block";
+            restartGameButton.style.display = "none";
+            downloadButton.style.display = "none";
+        }, 1100);
     })
-}
-
-if (allButtons) {
-    for (let i = 0; i < allButtons.length; i++) {
-        allButtons[i].addEventListener("click", event => {
-            playSFX();
-        })
-    }
-}
-
-function playSFX() {
-    if (!clickSound.muted) {
-        clickSound.currentTime = 0;
-        clickSound.play();
-    }
 }

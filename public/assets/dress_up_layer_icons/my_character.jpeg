@@ -38,7 +38,7 @@
                         <button id="doneButton"><img src="assets/other/checkmark.png"></button>
                         <button id="restartGameButton" style="display:none">Restart Game?</button>
                     </div>
-                    <button id="downloadButton" style="display:none"><a id="downloadLink" href="#" download="my_character.png">Download Image?</a></button>
+                    <button id="downloadButton" style="display:none"><a id="downloadLink" href="#" download="my_character.jpeg">Download Image?</a></button>
                     <label>
                         <input id="zoomCheckbox" type="checkbox" style="display:none">
                         <img id="mainBody" src="assets/dress_up_elements/skins/skin_3.png">
@@ -50,7 +50,7 @@
                         <img id="socks" style="display:none">
                         <img id="shoes" style="display:none">
                         <img id="background" style="display:none">
-                        <canvas id="canvas" style="display:none"></canvas>
+                        <canvas id="canvas"></canvas>
                     </label>
                 </div>
                 <div id="closetContainer">
