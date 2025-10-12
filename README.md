@@ -1,9 +1,10 @@
 # Dress-Up Game
 ## About
-This is a game where you can choose the outfit and customize the appearance of your character. Currently, there is only a female option for customization.
+This is a game where you can choose the outfit and customize the appearance of your character. Currently, there is only a female option for customization. The dress-up options are also limited, but I plan to add a lot more in the future.
 
 ## Important Information
 ### URL to webpage (for those who don't want to download packages)
+- https://dress-up-game-erican1214.netlify.app/
 
 ### Applications Needed
 - Node.js
@@ -28,6 +29,7 @@ This is a game where you can choose the outfit and customize the appearance of y
 
 ### Compatability/Accessibility
 - I have only tested this webpage on a Google Chrome Browser. It is possible that it won't be compatible with other browsers
+- After clicking the done button successfully, the character container is no longer responsive to immediate media width/height changes due to added animations
 
 ### Image Attributions
 - All images are drawn by me on [Pixlart](https://www.pixilart.com/)
