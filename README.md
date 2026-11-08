@@ -28,7 +28,7 @@ This is a game where you can choose the outfit and customize the appearance of y
 &larr; README.md
 - This file currently, shows details about how this webpage works
 
-&larr; index.ejs
+&larr; index.html
 - HTML file that shows content of the webpage
 
 &larr; style.css
@@ -36,9 +36,3 @@ This is a game where you can choose the outfit and customize the appearance of y
 
 &larr; script.js
 - Javascript file that adds interaction to the webpage and listens for events
-
-&larr; server.js
-- Javascript file that connects the code to server
-
-&larr; package.json, package-lock.json
-- Shows the necessary libraries/packages/dependencies for Node.js to run Express.js
